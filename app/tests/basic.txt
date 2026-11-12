@@ -1,0 +1,72 @@
+# CANON-4 in the host simulator: ./build.sh --host
+wait 600
+expect page 0
+# PLAY: the four heads together. Head 1 cell 1 (G3); head 2 a third up (Bb3); head 3 backwards on the snake,
+# an octave up, from cell 12 (F5); head 4 two octaves down (G1)
+tap PLAY
+wait 40
+expect playing 1
+expect_out USB 90 37 70
+expect_out USB 91 3A 70
+expect_out USB 92 4D 58
+expect_out USB 93 1F 70
+wait 1000
+# tap cell 4 (a rest): now a note; tap again: a rest
+tapkey w3
+wait 30
+expect cell 3
+expect on 1
+tapkey w3
+wait 30
+expect on 0
+# hold cell 1, K1: its pitch (no toggle on release)
+key w0 down
+wait 20
+turn K1 2
+turn K3 -4
+wait 20
+key w0 up
+wait 20
+expect cell 0
+expect on 1
+expect deg 2
+expect chance 80
+# head 2 (black key 2): K1 rate, K2 transpose, K4 length; black key 7: its path is SPIRAL
+tapkey b1
+wait 20
+expect head 1
+turn K1 -2
+turn K2 2
+turn K4 -8
+tapkey b8
+wait 20
+expect rate 4
+expect transpose 4
+expect hlen 8
+expect path 4
+# GLO held + black 2 mutes it
+press GLO
+tapkey b1
+release GLO
+wait 20
+expect muted 1
+# dice and undo keep the first cell
+tap ARP
+wait 20
+tap SEQ
+wait 20
+expect deg 2
+# REC writes: C4 (key 7) into the cell shown, as degree 3 of G minor (less head 2's transpose 4: -1)
+tap REC
+tapkey 7
+wait 20
+tap REC
+wait 20
+expect deg -1
+tap PLAY
+wait 40
+expect playing 0
+press ARP
+wait 1200
+expect card 8
+release ARP

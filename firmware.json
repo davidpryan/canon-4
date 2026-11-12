@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "id": "canon-4",
+  "name": "CANON-4",
+  "author": "David Ryan",
+  "license": "MPL-2.0",
+  "tagline": "one phrase, four playheads: a canon",
+  "description": "CANON-4 plays one sixteen-note phrase with four playheads at once. The phrase is a 4 x 4 field of scale degrees and rests on the white keys; each head reads it at its own rate and direction, along its own path (rows, columns, snake, diagonal, spiral, random), from its own offset and length, transposed by its own degrees, with its own sound. One edit and every voice hears it. The heads drift apart and meet again every few bars. Its own synth, MIDI out over USB and Bluetooth.",
+  "tags": ["sequencer", "generative", "synth", "midi"],
+  "install": "https://davidpryan.github.io/canon-4/install/",
+  "site": "https://davidpryan.github.io/canon-4/",
+  "source": "https://github.com/davidpryan/canon-4",
+  "screenshot": "app/docs/img/screen-field.png",
+  "hardware": {
+    "models": ["FM-1"],
+    "flash": ["856014", "B36014"],
+    "features": ["bluetooth-midi", "bluetooth-midi-devices", "velocity", "pressure", "screen-reader"]
+  },
+  "credits": "Built on fm1-base and felucca-bsp, from Felucca by Leo Kuroshita (Hügelton Instruments). After Fugue Machine, PolyPhase and Make Noise Rene. Fonts: Barlow (SIL OFL 1.1)."
+}

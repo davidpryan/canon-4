@@ -1,0 +1,12 @@
+# CANON-4's manual screenshots: ./build.sh --shots
+wait 600
+tap PLAY
+wait 2100
+shot screen-field.png
+key w5 down
+wait 300
+shot screen-cell.png
+key w5 up
+tap EDIT
+wait 100
+shot screen-sound.png
