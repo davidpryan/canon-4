@@ -50,6 +50,10 @@ static const char *const CARD_TEXT[NB] = {
 #endif
 };
 
+static const char *const HINTS[NB] = {
+    [B_GLO] = "BLACK 1-4: MUTE HEADS  TAP: SETUP", [B_SEL] = "PRESETS: SCALE  SELECT: ROOT",
+};
+
 static void dirty(void) { U.dirty = 1; }
 static head_t *hd(void) { return &P.head[U.head % NHEAD]; }
 static cell_t *cel(void) { return &P.cell[U.cell % NCELL]; }
@@ -388,17 +392,14 @@ static void draw_field(void)
         cv_text(x + 4, y, &FONT_XS, s, col);
         s_cpy(s, PATH_NM[hh->path % NPATH]);
         cv_text(x + 4, y + 13, &FONT_T, hh->muted ? "MUTED" : s, K_DIM);
-        s[0] = 0;
-        if (hh->transpose)
-            sgn_cat(s, hh->transpose);
-        else
-            s_cpy(s, "0");
+        s_cpy(s, "TR ");
+        sgn_cat(s, hh->transpose);
         if (hh->octave) {
-            s_cat(s, " O");
+            s_cat(s, "  OCT ");
             sgn_cat(s, hh->octave);
         }
         if (hh->dir != HD_FWD)
-            s_cat(s, hh->dir == HD_REV ? " <" : " <>");
+            s_cat(s, hh->dir == HD_REV ? "  BACK" : "  PING");
         cv_text(x + 4, y + 24, &FONT_T, s, K_DIM);
     }
 }
@@ -451,6 +452,7 @@ static void draw(void)
         i_cat(d, hd()->len);
         kit_knobs(RATE_NM[hd()->rate % NRATE], b, c, d, HEAD_C[U.head % NHEAD]);
     }
+    kit_hint(HINTS, ACCENT);
 }
 
 static void lights(void)
